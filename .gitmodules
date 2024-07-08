@@ -1,0 +1,15 @@
+[submodule "web_application"]
+	path = web_application
+	url = https://github.com/Projet-annuel-5A/application.git
+[submodule "middleware"]
+	path = middleware
+	url = https://github.com/Projet-annuel-5A/api_middleware.git
+[submodule "audio"]
+	path = audio
+	url = https://github.com/Projet-annuel-5A/api_audio.git
+[submodule "text"]
+	path = text
+	url = https://github.com/Projet-annuel-5A/api_text.git
+[submodule "video"]
+	path = video
+	url = https://github.com/Projet-annuel-5A/api_video.git
