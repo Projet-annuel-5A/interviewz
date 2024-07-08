@@ -1,4 +1,4 @@
-![Interviewz logo](images/interviewz.png)
+![Interviewz logo](https://github.com/Projet-annuel-5A/interviewz/blob/main/images/interviewz.png?raw=true)
 
 ## Overview
 Interviewz is a comprehensive application designed to analyze sentiments detected from video interviews across different sources:
