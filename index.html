@@ -113,7 +113,7 @@
                     <li><a href="#modules">Modules</a></li>
                     <li><a href="#endpoints">API Endpoints</a></li>
                     <li><a href="#directory">Directory Structure</a></li>
-                    <li><a href="#repository">Github Repository</a></li>
+                    <li><a href="#repository">GitHub Repository</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -147,6 +147,7 @@
                 <ul>
                     <li>`app.py`: Defines the FastAPI application, routes, and the main processing logic.</li>
                     <li>`Process` class: Handles downloading, preprocessing, and interfacing with other APIs for complete interview analysis.</li>
+                    <li>`utils/process.py`: Includes the necessary steps for audio extraction and processing, such as diarization and speech-to-text conversion.</li>
                     <li>`utils/utils.py`: Provides utility functions for logging, file handling, and database interactions.</li>
                 </ul>
             </div>
@@ -216,6 +217,7 @@
                     <ul>Parameters:
                         <ul>session_id (int): ID of the session.</ul>
                         <ul>interview_id (int): ID of the interview.</ul>
+                        <ul>model (str): Name of the model to be used for video inference.</ul>
                     </ul>
                     <ul>Returns:
                         <ul>A JSON object with the status "ok" upon successful processing.</ul>
@@ -259,14 +261,6 @@
                         <ul>HTTPException: An exception with status code 500 if processing fails.</ul>
                     </ul>
                 </li>
-                <li><strong>POST /testConfig</strong>:
-                    <ul>Description:
-                        <ul>Endpoint for testing the device where the models its loaded.</ul>
-                    </ul>
-                    <ul>Response:
-                        <ul>A JSON object showing the model ID and the device (CPU or GPU) it is loaded on.</ul>
-                    </ul>
-                </li>
             </ul>
             <h3>Text Module</h3>
             <ul>
@@ -298,14 +292,6 @@
                         <ul>HTTPException: Exception with a status code 500 indicating a server error if the process fails.</ul>
                     </ul>
                 </li>
-                <li><strong>POST /testConfig</strong>:
-                    <ul>Description:
-                        <ul>Endpoint for testing the device where the models its loaded.</ul>
-                    </ul>
-                    <ul>Response:
-                        <ul>A JSON object showing the model ID and the device (CPU or GPU) it is loaded on.</ul>
-                    </ul>
-                </li>
             </ul>
             <h3>Video Module</h3>
             <ul>
@@ -324,20 +310,13 @@
                     <ul>Parameters:
                         <ul>session_id (int): The session ID for the video data.</ul>
                         <ul>interview_id (int): The interview ID for the video data.</ul>
+                        <ul>model_type (str): The model to use for prediction. Should be either 'yolo_cloud', 'yolo_local' or 'deepface'.</ul>
                     </ul>
                     <ul>Returns:
                         <ul>dict: A status message indicating the success or failure of the operation.</ul>
                     </ul>
                     <ul>Raises:
                         <ul>HTTPException: Exception with status code 500 indicating a server error if the process fails.</ul>
-                    </ul>
-                </li>
-                <li><strong>POST /testConfig</strong>:
-                    <ul>Description:
-                        <ul>Endpoint for testing the device where the models its loaded.</ul>
-                    </ul>
-                    <ul>Response:
-                        <ul>A JSON object showing the model ID and the device (CPU or GPU) it is loaded on.</ul>
                     </ul>
                 </li>
             </ul>
