@@ -54,13 +54,14 @@
             margin: 20px auto;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .main h1 {
-            text-align: center;
-            margin-bottom: 20px;
+        .main h1, .main h2, .main h3 {
             color: #0056b3;
         }
+        .main h1 {
+            text-align: center;
+            font-size: xxx-large;
+        }
         .modules h3 {
-            color: #0056b3;
             margin-bottom: 10px;
         }
         .modules p, .modules ul {
@@ -112,6 +113,7 @@
                     <li><a href="#modules">Modules</a></li>
                     <li><a href="#endpoints">API Endpoints</a></li>
                     <li><a href="#directory">Directory Structure</a></li>
+                    <li><a href="#repository">Github Repository</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -120,7 +122,7 @@
 
     <div class="container main">
         <section id="overview">
-            <h1>Interviewz Overview</h1>
+            <h1>Interviewz</h1>
             <p>Interviewz is a comprehensive application designed to analyze sentiments detected from video interviews across different sources:</p>
             <ul>
                 <li>Audio (voice tone and pitch)</li>
@@ -147,48 +149,51 @@
                     <li>`Process` class: Handles downloading, preprocessing, and interfacing with other APIs for complete interview analysis.</li>
                     <li>`utils/utils.py`: Provides utility functions for logging, file handling, and database interactions.</li>
                 </ul>
+            </div>
 
+            <div class="modules">
                 <h3>2. Audio Module</h3>
                 <p><strong>Purpose</strong>: The Audio module processes audio data to extract and analyze emotions.</p>
-                <p><strong>How It Works</strong>:</p>
-                <ul>
-                    <li><strong>Initialization</strong>: Sets up the FastAPI application and model loading.</li>
-                    <li><strong>Audio Analysis Endpoint (`/analyse_audio`)</strong>: Fetches audio segments from the database. Splits the audio into segments and predicts emotions using a deep learning model. Updates the results in the database.</li>
-                </ul>
-                <p><strong>Key Components</strong>:</p>
-                <ul>
-                    <li>`app.py`: Defines the FastAPI application and routes.</li>
-                    <li>`audioEmotions.py`: Contains the `AudioEmotions` class responsible for processing audio segments and predicting emotions.</li>
-                    <li>`utils/utils.py`: Manages file operations, logging, and interactions with the Supabase database.</li>
-                </ul>
+                <p><strong>Overview</strong>: The Audio Emotions Analysis module of the <strong>Interviewz</strong> application is responsible for analyzing audio segments from interviews and determining the emotional content within these segments. The module uses FastAPI for serving the endpoints, PyTorch and torchaudio for audio processing, and a Supabase database for storing and retrieving data.</p>
+                <p><strong>Components</strong>:</p>
+                <h4>FastAPI Application (app.py)</h4>
+                <p>Initializes a FastAPI application.</p>
+                <h4>AudioEmotions (audioEmotions.py)</h4>
+                <p>Handles the extraction of audio segments from storage and predicts emotions using pre-trained models. Utilizes torchaudio for audio handling and transformers for emotion classification.</p>
+                <h4>Utilities (utils/utils.py)</h4>
+                <p>Provides methods for logging, configuration management, file operations, and database interactions. Manages connections to both Supabase for data handling and S3 buckets for file storage.</p>
+                <h4>Models (utils/models.py)</h4>
+                <p>Manages the loading and usage of machine learning models for audio classification. Ensures models are loaded once using singleton pattern to optimize resources.</p>
+            </div>
 
+            <div class="modules">
                 <h3>3. Text Module</h3>
                 <p><strong>Purpose</strong>: The Text module processes textual data to analyze sentiments and emotions.</p>
-                <p><strong>How It Works</strong>:</p>
-                <ul>
-                    <li><strong>Initialization</strong>: Sets up the FastAPI application and model loading.</li>
-                    <li><strong>Text Analysis Endpoint (`/analyse_text`)</strong>: Fetches text data from the database. Predicts emotions and sentiments using NLP models. Updates the results in the database.</li>
-                </ul>
-                <p><strong>Key Components</strong>:</p>
-                <ul>
-                    <li>`app.py`: Defines the FastAPI application and routes.</li>
-                    <li>`textEmotions.py`: Contains the `TextEmotions` class responsible for processing text data and predicting emotions.</li>
-                    <li>`utils/utils.py`: Manages file operations, logging, and interactions with the Supabase database.</li>
-                </ul>
+                <p><strong>Overview</strong>: The Text module of the <strong>Interviewz</strong> application processes textual data to analyze emotional content using machine learning models. It leverages state-of-the-art NLP models for sequence classification to predict emotional responses based on the text from interviews.</p>
+                <p><strong>Components</strong>:</p>
+                <h4>FastAPI Application (app.py)</h4>
+                <p>Initializes a FastAPI application.</p>
+                <h4>TextEmotions (textEmotions.py)</h4>
+                <p>Manages the text analysis process by fetching text data, applying emotional analysis, and updating results. Utilizes pre-trained NLP models to classify text into emotional categories.</p>
+                <h4>Utilities (utils/utils.py)</h4>
+                <p>Includes logging setup, configuration management, and methods for file operations on S3 storage. Implements methods for updating database records and managing connections to Supabase for data storage.</p>
+                <h4>Models (utils/models.py)</h4>
+                <p>Responsible for loading and managing NLP models and tokenizers for text emotion classification. Implements singleton pattern to ensure models are loaded once per application lifecycle.</p>
+            </div>
 
+            <div class="modules">
                 <h3>4. Video Module</h3>
                 <p><strong>Purpose</strong>: The Video module processes video data to detect emotions through facial recognition.</p>
-                <p><strong>How It Works</strong>:</p>
-                <ul>
-                    <li><strong>Initialization</strong>: Sets up the FastAPI application and model loading.</li>
-                    <li><strong>Video Analysis Endpoint (`/analyse_video`)</strong>: Fetches video segments from the database. Splits the video into frames and predicts emotions using facial recognition models. Updates the results in the database.</li>
-                </ul>
-                <p><strong>Key Components</strong>:</p>
-                <ul>
-                    <li>`app.py`: Defines the FastAPI application and the main endpoint for video analysis.</li>
-                    <li>`videoEmotions.py`: Contains the `VideoEmotions` class responsible for splitting video frames and predicting emotions.</li>
-                    <li>`utils/utils.py`: Manages file operations, logging, and interactions with the Supabase database.</li>
-                </ul>
+                <p><strong>Overview</strong>: The Video module of the <strong>Interviewz</strong> application processes video data to analyze emotional content using advanced computer vision models. It handles video segments, applies emotion recognition using frame analysis, and updates emotional data back to the database.</p>
+                <p><strong>Components</strong>:</p>
+                <h4>FastAPI Application (app.py)</h4>
+                <p>Initializes a FastAPI application.</p>
+                <h4>VideoEmotions (videoEmotions.py)</h4>
+                <p>Manages the video analysis process by fetching video data, applying frame-by-frame emotion analysis, and updating results. Utilizes DeepFace for facial emotion recognition (planned to be replaced by a YOLO model).</p>
+                <h4>Utilities (utils/utils.py)</h4>
+                <p>Provides methods for configuration management, database interactions, file handling, and logging. Manages connections to Supabase for data handling and S3 buckets for file storage.</p>
+                <h4>Models (utils/models.py)</h4>
+                <p>Handles configuration settings but currently does not load specific models due to the module's reliance on DeepFace.</p>
             </div>
         </section>
 
@@ -196,24 +201,145 @@
             <h2>API Endpoints</h2>
             <h3>Middleware Module</h3>
             <ul>
-                <li><strong>GET /health</strong>: Check the health status of the API.</li>
-                <li><strong>POST /preprocess</strong>: Preprocess the provided audio file.</li>
-                <li><strong>POST /predict</strong>: Start the complete processing of the audio data.</li>
+                <li><strong>GET /health</strong>:
+                    <ul>Description:
+                        <ul>Check the health status of the API.</ul>
+                    </ul>
+                    <ul>Response:
+                        <ul>Returns a JSON object with the status "ok".</ul>
+                    </ul>
+                </li>
+                <li><strong>POST /preprocess</strong>:
+                    <ul>Description:
+                        <ul>Preprocess the provided audio file.</ul>
+                    </ul>
+                    <ul>Parameters:
+                        <ul>session_id (int): ID of the session.</ul>
+                        <ul>interview_id (int): ID of the interview.</ul>
+                    </ul>
+                    <ul>Returns:
+                        <ul>A JSON object with the status "ok" upon successful processing.</ul>
+                    </ul>
+                </li>
+                <li><strong>POST /predict</strong>:
+                    <ul>Description:
+                        <ul>Manages the complete processing and inference workflow.</ul>
+                    </ul>
+                    <ul>Parameters:
+                        <ul>session_id (int): ID of the session.</ul>
+                        <ul>interview_id (int): ID of the interview.</ul>
+                    </ul>
+                    <ul>Returns:
+                        <ul>A JSON object with the status "ok" upon successful processing.</ul>
+                    </ul>
+                </li>
             </ul>
             <h3>Audio Module</h3>
             <ul>
-                <li><strong>GET /health</strong>: Check the health status of the API.</li>
-                <li><strong>POST /analyse_audio</strong>: Process audio data to analyze emotions.</li>
+                <li><strong>GET /health</strong>:
+                    <ul>Description:
+                        <ul>Check the health status of the API.</ul>
+                    </ul>
+                    <ul>Response:
+                        <ul>Returns a JSON object with the status "ok".</ul>
+                    </ul>
+                </li>
+                <li><strong>POST /analyse_audio</strong>:
+                    <ul>Description:
+                        <ul>Process audio data to detect sentiments.</ul>
+                    </ul>
+                    <ul>Parameters:
+                        <ul>session_id (int): The session ID related to the audio file.</ul>
+                        <ul>interview_id (int): The interview ID of the audio file.</ul>
+                    </ul>
+                    <ul>Returns:
+                        <ul>dict: Status message indicating the outcome of the operation.</ul>
+                    </ul>
+                    <ul>Raises:
+                        <ul>HTTPException: An exception with status code 500 if processing fails.</ul>
+                    </ul>
+                </li>
+                <li><strong>POST /testConfig</strong>:
+                    <ul>Description:
+                        <ul>Endpoint for testing the device where the models its loaded.</ul>
+                    </ul>
+                    <ul>Response:
+                        <ul>A JSON object showing the model ID and the device (CPU or GPU) it is loaded on.</ul>
+                    </ul>
+                </li>
             </ul>
             <h3>Text Module</h3>
             <ul>
-                <li><strong>GET /health</strong>: Check the health status of the API.</li>
-                <li><strong>POST /analyse_text</strong>: Process text data to analyze emotions.</li>
+                <li><strong>GET /health</strong>:
+                    <ul>Description:
+                        <ul>Check the health status of the API.</ul>
+                    </ul>
+                    <ul>Response:
+                        <ul>Returns a JSON object with the status "ok".</ul>
+                    </ul>
+                </li>
+                <li><strong>POST /analyse_text</strong>:
+                    <ul>Description:
+                        <ul>Process text data for emotional analysis.</ul>
+                    </ul>
+                    <ul>Parameters:
+                        <ul>session_id (int): The session ID related to the text file.</ul>
+                        <ul>interview_id (int): The interview ID of the text file.</ul>
+                    </ul>
+                    <ul>Functionality:
+                        <ul>Retrieves texts from a database.</ul>
+                        <ul>Processes each text to determine emotion using a deep learning model.</ul>
+                        <ul>Updates the database with the analyzed results.</ul>
+                    </ul>
+                    <ul>Returns:
+                        <ul>A JSON object with the status "ok" upon successful processing.</ul>
+                    </ul>
+                    <ul>Raises:
+                        <ul>HTTPException: Exception with a status code 500 indicating a server error if the process fails.</ul>
+                    </ul>
+                </li>
+                <li><strong>POST /testConfig</strong>:
+                    <ul>Description:
+                        <ul>Endpoint for testing the device where the models its loaded.</ul>
+                    </ul>
+                    <ul>Response:
+                        <ul>A JSON object showing the model ID and the device (CPU or GPU) it is loaded on.</ul>
+                    </ul>
+                </li>
             </ul>
             <h3>Video Module</h3>
             <ul>
-                <li><strong>GET /health</strong>: Check the health status of the API.</li>
-                <li><strong>POST /analyse_video</strong>: Process video data to analyze emotions.</li>
+                <li><strong>GET /health</strong>:
+                    <ul>Description:
+                        <ul>Check the health status of the API.</ul>
+                    </ul>
+                    <ul>Response:
+                        <ul>Returns a JSON object with the status "ok".</ul>
+                    </ul>
+                </li>
+                <li><strong>POST /analyse_video</strong>:
+                    <ul>Description:
+                        <ul>Process video data for emotional analysis.</ul>
+                    </ul>
+                    <ul>Parameters:
+                        <ul>session_id (int): The session ID for the video data.</ul>
+                        <ul>interview_id (int): The interview ID for the video data.</ul>
+                    </ul>
+                    <ul>Returns:
+                        <ul>dict: A status message indicating the success or failure of the operation.</ul>
+                    </ul>
+                    <ul>Raises:
+                        <ul>HTTPException: Exception with status code 500 indicating a server error if the process fails.</ul>
+                    </ul>
+                </li>
+                <li><strong>POST /testConfig</strong>:
+                    <ul>Description:
+                        <ul>Endpoint for testing the device where the models its loaded.</ul>
+                    </ul>
+                    <ul>Response:
+                        <ul>A JSON object showing the model ID and the device (CPU or GPU) it is loaded on.</ul>
+                    </ul>
+                </li>
             </ul>
         </section>
 
@@ -251,6 +377,11 @@ interviewz/
             </pre>
         </section>
 
+        <section id="repository">
+            <h2>Repository</h2>
+            <p>Check out the project on <a href="https://github.com/Projet-annuel-5A/interviewz" target="_blank">GitHub</a>.</p>
+        </section>
+        
         <section id="contact">
             <h2>Contact</h2>
             <p>For any questions, please contact the project maintainers at <a href="mailto:contact@interviewz.online">contact@interviewz.online</a>.</p>
