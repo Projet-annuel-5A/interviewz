@@ -13,3 +13,6 @@
 [submodule "video"]
 	path = video
 	url = https://github.com/Projet-annuel-5A/api_video.git
+[submodule "mlops"]
+	path = mlops
+	url = https://github.com/Projet-annuel-5A/mlops.git
