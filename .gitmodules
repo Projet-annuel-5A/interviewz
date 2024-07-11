@@ -16,3 +16,6 @@
 [submodule "mlops"]
 	path = mlops
 	url = https://github.com/Projet-annuel-5A/mlops.git
+[submodule "supabase"]
+	path = supabase
+	url = https://github.com/Projet-annuel-5A/supabase.git
